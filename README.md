@@ -1,1 +1,1 @@
-# Algorithm_Study
+# SQL_Study
