@@ -1,0 +1,13 @@
+SELECT 
+    ao.ANIMAL_ID, 
+    ao.NAME
+FROM 
+    ANIMAL_INS ai
+INNER JOIN 
+    ANIMAL_OUTS ao
+ON
+    ai.ANIMAL_ID = ao.ANIMAL_ID
+WHERE 
+    ai.DATETIME > ao.DATETIME
+ORDER BY
+    ai.DATETIME
