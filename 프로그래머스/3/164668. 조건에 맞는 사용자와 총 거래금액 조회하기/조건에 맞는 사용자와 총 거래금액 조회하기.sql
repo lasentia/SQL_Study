@@ -1,0 +1,25 @@
+WITH SALES AS (
+    SELECT *, 
+        SUM(b.PRICE) AS TOTAL_SALES
+    FROM 
+        USED_GOODS_BOARD b
+    WHERE 
+        b.STATUS = 'DONE'
+    GROUP BY 
+        b.WRITER_ID
+)
+
+SELECT 
+    u.USER_ID, 
+    u.NICKNAME, 
+    s.TOTAL_SALES
+FROM 
+    SALES s
+LEFT JOIN
+    USED_GOODS_USER u
+ON 
+    s.WRITER_ID = u.USER_ID
+WHERE 
+    s.TOTAL_SALES >= 700000
+ORDER BY 
+    s.TOTAL_SALES
