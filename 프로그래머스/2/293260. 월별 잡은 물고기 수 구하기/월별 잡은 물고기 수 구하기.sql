@@ -1,0 +1,13 @@
+SELECT 
+    COUNT(MONTH) AS FISH_COUNT, 
+    MONTH
+FROM(
+    SELECT 
+        MONTH(TIME) AS MONTH
+    FROM 
+        FISH_INFO  
+    ) f
+GROUP BY 
+    f.MONTH
+ORDER BY 
+    MONTH 
