@@ -1,0 +1,7 @@
+SELECT COUNT(NAME)
+FROM ( 
+        SELECT NAME
+        FROM ANIMAL_INS
+        WHERE NAME IS NOT NULL ## NULL 제외
+        GROUP BY NAME
+) ai
