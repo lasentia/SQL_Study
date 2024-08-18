@@ -1,0 +1,21 @@
+## 22년 1월 판매된 도서 ID, 판매량
+WITH id_sale AS(
+    SELECT BOOK_ID, SALES
+    FROM BOOK_SALES
+    WHERE SALES_DATE LIKE '2022-01%'
+),
+## 저자별, 카테고리별, 매출액 계산
+name AS (
+    SELECT AUTHOR_ID, CATEGORY, (SALES * price) TOTAL_SALES 
+    FROM BOOK b
+    INNER JOIN id_sale i
+    ON b.BOOK_ID = i.BOOK_ID
+)
+
+## id, category 그룹화하여 전체 매출량 계산
+SELECT a.AUTHOR_ID, AUTHOR_NAME, CATEGORY, SUM(TOTAL_SALES) TOTAL_SALES
+FROM AUTHOR a  
+INNER JOIN name n
+ON a.AUTHOR_ID = n.AUTHOR_ID
+GROUP BY a.AUTHOR_ID, CATEGORY
+ORDER BY a.AUTHOR_ID, CATEGORY DESC
