@@ -1,0 +1,14 @@
+SELECT 
+    DISTINCT his.CAR_ID -- 중복 제외
+FROM 
+    CAR_RENTAL_COMPANY_CAR car
+INNER JOIN 
+    CAR_RENTAL_COMPANY_RENTAL_HISTORY his
+ON 
+    car.CAR_ID = his.CAR_ID
+WHERE 
+    MONTH(his.START_DATE) LIKE '%10%' -- 10월 대여 기록
+AND 
+    car.CAR_TYPE = '세단' -- 세단 종류
+ORDER BY 
+    his.CAR_ID DESC
