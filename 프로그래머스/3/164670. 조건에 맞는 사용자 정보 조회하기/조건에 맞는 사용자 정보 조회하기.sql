@@ -1,0 +1,16 @@
+# board에서 3건 이상 등록한 사용자만 추출 후 유저 테이블 결합
+WITH user3 AS (
+    SELECT WRITER_ID, COUNT(WRITER_ID)
+    FROM USED_GOODS_BOARD 
+    GROUP BY WRITER_ID
+    HAVING COUNT(WRITER_ID) >= 3 -- 3건 이상
+)
+
+-- 출력할 때 전화번호 형식 맞추기
+SELECT u.USER_ID, u.NICKNAME, 
+    CONCAT(u.CITY,' ',u.STREET_ADDRESS1,' ', u.STREET_ADDRESS2) '전체주소',
+    CONCAT(SUBSTR(u.TLNO, 1, 3),'-',SUBSTR(u.TLNO, 4, 4),'-',SUBSTR(u.TLNO, 8, 4)) '전화번호'
+FROM USED_GOODS_USER u
+RIGHT JOIN user3 u3
+ON u.USER_ID = u3.WRITER_ID
+ORDER BY u.USER_ID DESC
