@@ -1,0 +1,11 @@
+SELECT 
+    outs.ANIMAL_ID, outs.NAME
+FROM 
+    ANIMAL_INS ins
+INNER JOIN 
+    ANIMAL_OUTS outs
+ON 
+    ins.ANIMAL_ID = outs.ANIMAL_ID
+ORDER BY 
+    DATEDIFF(outs.DATETIME, ins.DATETIME) DESC -- 날짜의 뺄셈 연산
+LIMIT 2
