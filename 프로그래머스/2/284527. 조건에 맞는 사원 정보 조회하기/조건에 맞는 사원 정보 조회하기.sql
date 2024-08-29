@@ -1,0 +1,13 @@
+--  HR 그룹화 해서 합계 그리고 정렬 후 1개만 출력 그리고 조인
+WITH score AS(
+    SELECT EMP_NO, SUM(SCORE) SCORE
+    FROM HR_GRADE
+    GROUP BY EMP_NO
+    ORDER BY SCORE DESC
+    LIMIT 1
+)
+
+SELECT SCORE, s.EMP_NO, EMP_NAME, POSITION, EMAIL
+FROM score s
+INNER JOIN HR_EMPLOYEES he
+ON s.EMP_NO = he.EMP_NO
