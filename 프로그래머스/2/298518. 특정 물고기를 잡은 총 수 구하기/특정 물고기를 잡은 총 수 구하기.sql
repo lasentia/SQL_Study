@@ -1,0 +1,11 @@
+-- 코드를 작성해주세요
+WITH fish AS(
+    SELECT *
+    FROM FISH_NAME_INFO
+    WHERE FISH_NAME IN ('BASS', 'SNAPPER')
+)
+    
+SELECT COUNT(*) FISH_COUNT
+FROM fish f
+INNER JOIN FISH_INFO fi
+ON f.FISH_TYPE = fi.FISH_TYPE
