@@ -1,0 +1,13 @@
+SELECT 
+    CAR_ID, 
+    ROUND(AVG(DATEDIFF(END_DATE, START_DATE)+1), 1) AVERAGE_DURATION
+    -- +1을 하는 이유, 문제를 보면 9.5 - 9.5을 1일로 보았다 그러면 9.6이라면 2일로 본다.
+    -- 하지만 DATEDIFF는 같은 날짜의 연산은 0으로 본다. 
+FROM 
+    CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+GROUP BY 
+    CAR_ID
+HAVING 
+    AVERAGE_DURATION >= 7
+ORDER BY 
+    AVERAGE_DURATION DESC, CAR_ID DESC
