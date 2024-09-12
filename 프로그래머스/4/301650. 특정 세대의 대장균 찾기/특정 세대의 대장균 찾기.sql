@@ -1,0 +1,14 @@
+-- 2세대 자식을 찾기 : 2세대 자식이 3세대의 부모이기 때문
+WITH second_child AS(
+    SELECT e2.ID
+    FROM ECOLI_DATA e1
+    RIGHT JOIN ECOLI_DATA e2
+    ON e1.ID = e2.PARENT_ID
+    WHERE e1.PARENT_ID IS NULL AND e2.PARENT_ID IS NOT NULL 
+)
+
+SELECT e.ID
+FROM second_child s
+INNER JOIN ECOLI_DATA e
+ON s.ID = e.PARENT_ID
+ORDER BY e.ID
